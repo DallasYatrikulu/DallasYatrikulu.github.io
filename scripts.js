@@ -38,7 +38,7 @@ document.addEventListener("DOMContentLoaded", function () {
     };
 
     try {
-      const response = await fetch("https://script.google.com/macros/s/AKfycbxJCrftvOYNigGfpnBWEXrK8pODggNLvWf__ZBauhc10nlttf0wwxUwfp4OKfQBN1mX/exec", {
+      const response = await fetch("https://script.google.com/macros/s/AKfycbyThdH0-j_iz9fs5OqsAmDPpgWKajPbFJJVXv2n9ypghpod82lcpChXavUQzJSa5XE6/exec", {
         method: "POST",
         body: JSON.stringify(data),
         headers: {
