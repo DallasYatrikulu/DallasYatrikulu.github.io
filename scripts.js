@@ -17,8 +17,8 @@ document.addEventListener("DOMContentLoaded", function () {
     alert("'Need a Ride 🙋' page coming soon!");
   });
 
-  // On form submit
-  form.addEventListener("submit", function (e) {
+  // Handle form submission
+  form.addEventListener("submit", async function (e) {
     e.preventDefault();
 
     if (!form.checkValidity()) {
@@ -26,7 +26,35 @@ document.addEventListener("DOMContentLoaded", function () {
       return;
     }
 
-    alert("Thank you, Captain! 🧭 We'll get your crew shortly.");
-    form.reset();
+    const data = {
+      name: form.name.value,
+      phone: form.phone.value,
+      from: form.from.value,
+      to: form.to.value,
+      date: form.date.value,
+      time: form.time.value,
+      seats: form.seats.value,
+      notes: form.notes.value
+    };
+
+    try {
+      const response = await fetch("https://script.google.com/macros/s/AKfycbxJCrftvOYNigGfpnBWEXrK8pODggNLvWf__ZBauhc10nlttf0wwxUwfp4OKfQBN1mX/exec", {
+        method: "POST",
+        body: JSON.stringify(data),
+        headers: {
+          "Content-Type": "application/json"
+        }
+      });
+
+      if (response.ok) {
+        alert("Thank you, Captain! 🧭 Your ride has been logged.");
+        form.reset();
+      } else {
+        alert("Oops! Something went wrong. Please try again.");
+      }
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      alert("Error connecting to the sheet. Try again later.");
+    }
   });
 });
